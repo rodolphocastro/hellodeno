@@ -22,7 +22,7 @@ export class LivingBeing { // the export keyword may also be used for classes.
   /**
    * flags whenever this being is alive or not. Defaults to true.
    */
-  isAlive: boolean = true;
+  isAlive = true;
 
   /**
    * mutates the living being into being dead.
@@ -74,12 +74,12 @@ export class SimsCelebrity extends Person implements Scoreable {
   }
 
   decreaseScore() {
-    let result = this.score - 1;
+    const result = this.score - 1;
     this.currentScore = result < 0 ? 0 : result;
   }
 
   increaseScore() {
-    let result = this.score + 1;
+    const result = this.score + 1;
     this.currentScore = result > 5 ? 5 : result;
   }
 }
