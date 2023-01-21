@@ -40,7 +40,7 @@ jobs:
         run: deno coverage coverage --lcov --output=coverage/coverage.lcov
 
       - name: Echo lcov contents and current dir contents
-        run: cat coverage/coverage.lcov && ls
+        run: cat coverage/coverage.lcov && ls && echo $PWD
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
