@@ -13,7 +13,7 @@ import {
   Scoreable,
   SimsCelebrity,
   Todo,
-} from "./basics.ts";
+} from "../src/basics.ts";
 
 Deno.test("a const never changes", () => {
   // Given
