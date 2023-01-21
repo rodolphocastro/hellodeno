@@ -31,10 +31,10 @@ jobs:
         run: deno lint
 
       - name: Run tests
-        run: deno test --coverage=cov_profile
+        run: deno test --coverage=coverage
 
       - name: Convert coverage results to lcov
-        run: deno coverage cov_profile --lcov --output=cov_profile.lcov
+        run: deno coverage coverage --lcov --output=coverage.lcov
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
