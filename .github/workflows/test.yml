@@ -34,7 +34,7 @@ jobs:
         run: deno test --coverage=coverage
 
       - name: Convert coverage results to lcov
-        run: deno coverage coverage --lcov --output=coverage.lcov
+        run: deno coverage coverage --lcov --output=coverage/coverage.lcov
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
