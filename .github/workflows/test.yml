@@ -24,12 +24,6 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
       - name: Verify formatting
         run: deno fmt --check
 
@@ -37,4 +31,13 @@ jobs:
         run: deno lint
 
       - name: Run tests
-        run: deno test
+        run: deno test --coverage=cov_profile
+
+      - name: Convert coverage results to lcov
+        run: deno coverage cov_profile --lcov --output=cov_profile.lcov
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
