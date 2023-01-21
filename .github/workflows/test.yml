@@ -39,8 +39,9 @@ jobs:
       - name: Convert coverage results to lcov
         run: deno coverage coverage --lcov --output=coverage/coverage.lcov
 
+      # Workaround: deno's lcov are always absolutes
       - name: Echo lcov contents and current dir contents
-        run: cat coverage/coverage.lcov && ls && echo $PWD
+        run: sed -i "s|SF:$(pwd)|SF:.|g" coverage/coverage.lcov
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
