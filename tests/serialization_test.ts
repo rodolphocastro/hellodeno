@@ -67,3 +67,15 @@ Deno.test("deno has native support to parse YAML strings into objects", () => {
   // Then
   assertEquals(got.name, defaultGameEntry.name);
 });
+
+Deno.test("standard libraries also allow serializing and deserializing from JSON", () => {
+  // Given
+
+  // When
+  const gotJson = JSON.stringify(defaultGameEntry);
+  const gotFromJson = JSON.parse(gotJson) as GameEntry;
+
+  // Then
+  assertEquals(gotFromJson.name, defaultGameEntry.name);
+  assert(gotJson.includes(gotFromJson.name));
+});
