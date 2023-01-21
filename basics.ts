@@ -83,3 +83,11 @@ export class SimsCelebrity extends Person implements Scoreable {
     this.currentScore = result > 5 ? 5 : result;
   }
 }
+
+/**
+ * a representation of a "to-do" item
+ */
+export interface Todo {
+  title: string;
+  body?: string;
+}
