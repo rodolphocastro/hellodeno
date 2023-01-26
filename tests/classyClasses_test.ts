@@ -9,6 +9,7 @@ import {
   assertThrows,
 } from "https://deno.land/std@0.173.0/testing/asserts.ts";
 import { Movie, SmartMovie } from "../src/classyClasses.ts";
+import test = Deno.test;
 
 describe("Movie", function () {
   const expectedTitle = "Saw II";
@@ -35,7 +36,7 @@ describe("Movie", function () {
 
 describe("SmartMovie", () => {
   const inputTitle = "Saw IV";
-  let testSubject: Movie;
+  let testSubject: SmartMovie;
 
   // beforeEach runs before each and every step (it) within the scenario.
   beforeEach(() => {
@@ -57,5 +58,12 @@ describe("SmartMovie", () => {
     const gotJson = JSON.stringify(testSubject);
     const recoveredObjected = JSON.parse(gotJson) as SmartMovie;
     assertThrows(() => recoveredObjected.doSomething());
+  });
+
+  it("should have a method to recover from a json string", function () {
+    const gotJson = JSON.stringify(testSubject);
+    const got = SmartMovie.fromJson(gotJson);
+    assertEquals(got, testSubject);
+    got.doSomething(); // should not throw given we just recovered it into a class
   });
 });

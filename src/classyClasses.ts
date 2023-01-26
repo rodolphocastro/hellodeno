@@ -17,4 +17,9 @@ export class SmartMovie implements Movie {
   doSomething() {
     // Do nothing at all
   }
+
+  static fromJson(jsonString: string): SmartMovie {
+    const gotMovie = JSON.parse(jsonString) as Movie;
+    return new SmartMovie(gotMovie.title);
+  }
 }
