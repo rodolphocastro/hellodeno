@@ -22,7 +22,6 @@ import {
 } from "https://deno.land/std@0.173.0/testing/mock.ts";
 import { assertSnapshot } from "https://deno.land/std@0.173.0/testing/snapshot.ts";
 
-
 describe("Movie", function () {
   const expectedTitle = "Saw II";
   const systemUnderTest: Movie = {
@@ -123,21 +122,29 @@ describe("Mocking can be achieved with native libraries", function () {
   });
 });
 
-describe('Snapshot testing can be used with native libraries', function () {
-  console.debug("run with --allow-read to utilize snapshot testing")
-  console.debug("run with --allow-all -- --update to allow deno to update the snapshots")
-  const expectedTitle = "A morte da bezerra"
+describe("Snapshot testing can be used with native libraries", function () {
+  console.debug("run with --allow-read to utilize snapshot testing");
+  console.debug(
+    "run with --allow-all -- --update to allow deno to update the snapshots",
+  );
+  const expectedTitle = "A morte da bezerra";
   const movie: Movie = {
-    title: expectedTitle
+    title: expectedTitle,
   };
 
-  it('assertSnapshot creates a snapshot and asserts the object matches the snapshot', async function (t) {
-    await assertSnapshot(t, movie)
-  });
+  it(
+    "assertSnapshot creates a snapshot and asserts the object matches the snapshot",
+    async function (t) {
+      await assertSnapshot(t, movie);
+    },
+  );
 
-  it('assertSnapshot builds upon the last snapshot (based on the file) to assert how it has been modified', async function (t) {
-    // imagine that SmartMove is such an import class that we need to verify its behavior
-    const gotMovie = new SmartMovie(movie.title);
-    await assertSnapshot(t, gotMovie.title)
-  });
+  it(
+    "assertSnapshot builds upon the last snapshot (based on the file) to assert how it has been modified",
+    async function (t) {
+      // imagine that SmartMove is such an import class that we need to verify its behavior
+      const gotMovie = new SmartMovie(movie.title);
+      await assertSnapshot(t, gotMovie.title);
+    },
+  );
 });
