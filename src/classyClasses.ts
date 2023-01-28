@@ -14,12 +14,27 @@ export class SmartMovie implements Movie {
     this.title = inputTitle.toUpperCase();
   }
 
-  doSomething() {
-    // Do nothing at all
+  doSomething(): string {
+    return this.title;
   }
 
   static fromJson(jsonString: string): SmartMovie {
     const gotMovie = JSON.parse(jsonString) as Movie;
     return new SmartMovie(gotMovie.title);
   }
+}
+
+/**
+ * returns the upper of the input, just it.
+ * @param input
+ */
+export function returnUpper(input: string): string {
+  return input.toUpperCase();
+}
+
+export function screamWithExclamation(
+  input: string,
+  upperCaser: (x: string) => string,
+) {
+  return `${upperCaser(input)}!`;
 }

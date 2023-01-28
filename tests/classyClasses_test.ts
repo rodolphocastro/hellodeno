@@ -8,8 +8,18 @@ import {
   assertNotEquals,
   assertThrows,
 } from "https://deno.land/std@0.173.0/testing/asserts.ts";
-import { Movie, SmartMovie } from "../src/classyClasses.ts";
-import test = Deno.test;
+import {
+  Movie,
+  returnUpper,
+  screamWithExclamation,
+  SmartMovie,
+} from "../src/classyClasses.ts";
+import {
+  assertSpyCalls,
+  returnsNext,
+  spy,
+  stub,
+} from "https://deno.land/std@0.173.0/testing/mock.ts";
 
 describe("Movie", function () {
   const expectedTitle = "Saw II";
@@ -65,5 +75,44 @@ describe("SmartMovie", () => {
     const got = SmartMovie.fromJson(gotJson);
     assertEquals(got, testSubject);
     got.doSomething(); // should not throw given we just recovered it into a class
+  });
+});
+
+describe("Mocking can be achieved with native libraries", function () {
+  const expectedInput = "leroy jenkins";
+  const expectedOutputUpper = expectedInput.toUpperCase();
+  const expectedOutputScream = `${expectedOutputUpper}!`;
+
+  it("returnUpper returns an uppercase of an input", function () {
+    const got = returnUpper(expectedInput);
+    assertEquals(got, expectedOutputUpper);
+  });
+
+  it("screamWithExclamation returns an uppercase with !", function () {
+    const got = screamWithExclamation(expectedInput, returnUpper);
+    assertEquals(got, expectedOutputScream);
+  });
+
+  it("screamWithExclamation always calls the input lambda", function () {
+    const spiedReturnUpper = spy(returnUpper);
+    const got = screamWithExclamation(expectedInput, spiedReturnUpper);
+    assertEquals(got, expectedOutputScream);
+    assertSpyCalls(spiedReturnUpper, 1);
+  });
+
+  it("uppercaser from screamWithExclamation is mockable", function () {
+    const wellKnownSmartMovie = new SmartMovie(expectedInput);
+    const gotPudim = "pudim";
+    const stubbedMovie = stub(
+      wellKnownSmartMovie,
+      "doSomething",
+      returnsNext([expectedInput, gotPudim]),
+    );
+    assertEquals(wellKnownSmartMovie.doSomething(), expectedInput);
+    assertEquals(wellKnownSmartMovie.title, expectedOutputUpper);
+    assertEquals(wellKnownSmartMovie.doSomething(), gotPudim);
+    stubbedMovie.restore();
+    assertNotEquals(wellKnownSmartMovie.doSomething(), expectedInput);
+    assertEquals(wellKnownSmartMovie.doSomething(), expectedOutputUpper);
   });
 });
