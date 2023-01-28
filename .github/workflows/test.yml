@@ -34,7 +34,7 @@ jobs:
         run: deno lint
 
       - name: Run tests
-        run: deno test --coverage=coverage
+        run: deno test --coverage=coverage --allow-read
 
       - name: Convert coverage results to lcov
         run: deno coverage coverage --lcov --output=coverage/coverage.lcov
