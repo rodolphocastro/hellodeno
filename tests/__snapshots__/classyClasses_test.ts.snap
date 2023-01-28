@@ -1,0 +1,9 @@
+export const snapshot = {};
+
+snapshot[`Snapshot testing can be used with native libraries > assertSnapshot creates a snapshot and asserts the object matches the snapshot 1`] = `
+{
+  title: "A morte da bezerra",
+}
+`;
+
+snapshot[`Snapshot testing can be used with native libraries > assertSnapshot builds upon the last snapshot (based on the file) to assert how it has been modified 1`] = `"A MORTE DA BEZERRA"`;

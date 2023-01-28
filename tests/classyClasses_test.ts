@@ -20,6 +20,8 @@ import {
   spy,
   stub,
 } from "https://deno.land/std@0.173.0/testing/mock.ts";
+import { assertSnapshot } from "https://deno.land/std@0.173.0/testing/snapshot.ts";
+
 
 describe("Movie", function () {
   const expectedTitle = "Saw II";
@@ -94,6 +96,8 @@ describe("Mocking can be achieved with native libraries", function () {
   });
 
   it("screamWithExclamation always calls the input lambda", function () {
+    // spy can be used to wrap a function/method and assert how many times
+    // it was called without tampering with its behavior
     const spiedReturnUpper = spy(returnUpper);
     const got = screamWithExclamation(expectedInput, spiedReturnUpper);
     assertEquals(got, expectedOutputScream);
@@ -103,6 +107,8 @@ describe("Mocking can be achieved with native libraries", function () {
   it("uppercaser from screamWithExclamation is mockable", function () {
     const wellKnownSmartMovie = new SmartMovie(expectedInput);
     const gotPudim = "pudim";
+    // stub can be used to wrap a function of an object, tamper with its behavior
+    // and also assert if it was called and how many times it was called
     const stubbedMovie = stub(
       wellKnownSmartMovie,
       "doSomething",
@@ -114,5 +120,24 @@ describe("Mocking can be achieved with native libraries", function () {
     stubbedMovie.restore();
     assertNotEquals(wellKnownSmartMovie.doSomething(), expectedInput);
     assertEquals(wellKnownSmartMovie.doSomething(), expectedOutputUpper);
+  });
+});
+
+describe('Snapshot testing can be used with native libraries', function () {
+  console.debug("run with --allow-read to utilize snapshot testing")
+  console.debug("run with --allow-all -- --update to allow deno to update the snapshots")
+  const expectedTitle = "A morte da bezerra"
+  const movie: Movie = {
+    title: expectedTitle
+  };
+
+  it('assertSnapshot creates a snapshot and asserts the object matches the snapshot', async function (t) {
+    await assertSnapshot(t, movie)
+  });
+
+  it('assertSnapshot builds upon the last snapshot (based on the file) to assert how it has been modified', async function (t) {
+    // imagine that SmartMove is such an import class that we need to verify its behavior
+    const gotMovie = new SmartMovie(movie.title);
+    await assertSnapshot(t, gotMovie.title)
   });
 });
