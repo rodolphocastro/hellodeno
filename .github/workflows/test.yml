@@ -27,6 +27,12 @@ jobs:
         with:
           deno-version: v1.x
 
+      - name: Cache Deno dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ hashFiles('lock.json') }}
+
       - name: Verify formatting
         run: deno fmt --check
 
