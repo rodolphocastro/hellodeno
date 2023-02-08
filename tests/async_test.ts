@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertNotEquals,
-} from "https://deno.land/std@0.173.0/testing/asserts.ts";
+import { assertEquals, assertNotEquals } from "std-asserts";
 import { doSomething, returnSomethingInUpper } from "../src/async.ts";
 
 Deno.test("deno supports async-await out of the box, simply use await on an async call to wait for it to complete", async () => {

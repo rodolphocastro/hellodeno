@@ -1,9 +1,6 @@
 // noinspection JSUnusedAssignment
 
-import {
-  assertEquals,
-  assertNotEquals,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals, assertNotEquals } from "std-asserts";
 import {
   aConstValue,
   hello,

@@ -1,25 +1,12 @@
-import {
-  beforeEach,
-  describe,
-  it,
-} from "https://deno.land/std@0.173.0/testing/bdd.ts";
-import {
-  assertEquals,
-  assertNotEquals,
-  assertThrows,
-} from "https://deno.land/std@0.173.0/testing/asserts.ts";
+import { beforeEach, describe, it } from "std-bdd";
+import { assertEquals, assertNotEquals, assertThrows } from "std-asserts";
 import {
   Movie,
   returnUpper,
   screamWithExclamation,
   SmartMovie,
 } from "../src/classyClasses.ts";
-import {
-  assertSpyCalls,
-  returnsNext,
-  spy,
-  stub,
-} from "https://deno.land/std@0.173.0/testing/mock.ts";
+import { assertSpyCalls, returnsNext, spy, stub } from "std-mock";
 import { assertSnapshot } from "https://deno.land/std@0.173.0/testing/snapshot.ts";
 
 describe("Movie", function () {

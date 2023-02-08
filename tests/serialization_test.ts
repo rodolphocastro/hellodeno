@@ -1,8 +1,4 @@
-import {
-  assert,
-  assertEquals,
-  assertNotEquals,
-} from "https://deno.land/std@0.173.0/testing/asserts.ts";
+import { assert, assertEquals, assertNotEquals } from "std-asserts";
 import {
   parse,
   stringify,

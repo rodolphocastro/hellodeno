@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "std-asserts": "https://deno.land/std@0.173.0/testing/asserts.ts",
+    "std-bdd": "https://deno.land/std@0.173.0/testing/bdd.ts",
+    "std-mock": "https://deno.land/std@0.173.0/testing/mock.ts"
+  },
+  "tasks": {
+    "tdd": "deno test -A --watch",
+    "tidy": "deno fmt && deno lint"
+  }
+}
