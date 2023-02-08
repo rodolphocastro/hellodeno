@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "deno",
+      "command": "task",
+      "args": [
+        "tdd"
+      ],
+      "problemMatcher": [
+        "$deno"
+      ],
+      "label": "deno task: tdd",
+      "detail": "TDD mode",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "deno",
+      "command": "task",
+      "args": [
+        "tidy"
+      ],
+      "label": "deno task: tidy",
+      "detail": "Tidy up all files",
+      "group": "none",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "clear": false
+      }
+    }
+  ]
+}
