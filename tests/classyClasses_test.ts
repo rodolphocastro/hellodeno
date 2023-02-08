@@ -7,7 +7,7 @@ import {
   SmartMovie,
 } from "../src/classyClasses.ts";
 import { assertSpyCalls, returnsNext, spy, stub } from "std-mock";
-import { assertSnapshot } from "https://deno.land/std@0.173.0/testing/snapshot.ts";
+import { assertSnapshot } from "std-snapshot";
 
 describe("Movie", function () {
   const expectedTitle = "Saw II";
